@@ -14,19 +14,33 @@ var connection = mysql.createConnection({
 	password: process.env.DB_PASS,
 
 	database: 'Bamazon',
-
-
 });
 
 connection.connect(function (err) {
 	// body...
-	if (err) throw err;
-
-	console.log('Connection as id ' + connection.threadId);
+	if (err) throw err;	
 	console.log('You made a connection to the DB');
 	main();
-	connection.end();
+	
 });
+
+function runagain() {
+	inquirer.prompt([
+		{
+			type: 'confirm',
+			name: 'confirm',
+			message: 'Do you want to buy more products',
+			default: true			
+		}
+		]),then(function(runagainresponse) {
+			console.log(runagainresponse.confirm);
+			if (runagainresponse.confirm) {
+				//main();
+			} else {
+				connection.end();
+			}
+		});
+}
 
 function main() { 
 
@@ -35,7 +49,7 @@ function main() {
 		if (err) throw err;
 		// Used the console.table to create a view in the console	
 		console.table(responseTable);
-		
+
 		inquirer.prompt([
 			{
 				type: 'input',
@@ -51,37 +65,41 @@ function main() {
 			}
 
 		]).then(function(inputresponse) {
-	    	
+	    	var matchItem = false;
+	    	var matchStockQ;
 	    	responseTable.forEach(function(row) {
-
-	    		// && parseInt(row.stock_quantity) > parseInt(inputresponse.stock_quantity)
-	    		if (row.item_id === inputresponse.item_id ) { 
+	    		//&& row.stock_quantity > inputresponse.stock_quantity
+	    		if (row.item_id === inputresponse.item_id  ) { 
 
 	    			console.log('match');
+	    			matchItem = true;
 	    			var parms = [
-	    			{
-	    				stock_quantity: row.stock_quantity - inputresponse.stock_quantity
-	    			},
-	    			{
-	    				item_id: row.item_id
-	    			}];
-	    			console.log(parms[0].stock_quantity);
+		    			{
+		    				stock_quantity: row.stock_quantity - inputresponse.stock_quantity
+		    			},
+		    			{
+		    				item_id: row.item_id
+		    			}];	    			
 
 	    			connection.query("UPDATE products SET ? WHERE ?", parms, function (error, updateresult) {
 						if (error) throw error;
-						console.log(updateresult.affectedRows + " record(s) updated");
+						//console.log(updateresult.affectedRows + " record(s) updated");
 						console.log("Items bought successfully!");
 						// Total cost of products
-						console.log('You total cost of sale for '+row.product_name+'is $ '+ row.stock_quantity * row.price);		             
+						console.log('You total cost of sale for '+row.product_name+' is $ '+ inputresponse.stock_quantity * row.price);
+						runagain();		             
 		            });   			
 		           
 	    		} 	    		
 
 	    	});
-
+	    	if (matchItem != true) {
+	    		console.log("\nPlease enter a valid product id!!\n");    		
+	    		
+	    	} 	
 
 
 		});
 
-	});// close connection
+	});// close connection query
 }
