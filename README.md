@@ -42,9 +42,9 @@ Below are some screenshots that show the functionality of the app.
 - Below are screenshoots for the `BamazonCustomer.js` file.
   - Running `node BamazonCustomer.js` will use MySQL to pull up all the products for sale.
     - The customer can then choose a product using its ID, then enter a quantity to buy. Says if the item was bought with the total price.
-      ![Customer Order](/images/customer1.png)
+      ![Customer Order](images/customer1.png)
     - As you see the trashbag stock was update. If the inventory is lacking product, the order will not be processed.
-      ![Order Invalid](/images/customer2.png)
+      ![Order Invalid](images/customer2.png)
 
 #### Manager
 
