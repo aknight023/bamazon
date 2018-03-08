@@ -39,25 +39,24 @@ Below are some screenshots that show the functionality of the app.
 
 #### Customer
 
-- Below are screenshoots for the `BamazonCustomer.js` file.
+- Below are screenshoots for the `BamazonCustomer.js` file:
   - Running `node BamazonCustomer.js` will use MySQL to pull up all the products for sale.
     - The customer can then choose a product using its ID, then enter a quantity to buy. Says if the item was bought with the total price.
       ![Customer Order](images/customer1.PNG)
     - As you see the trashbag stock was update. If the inventory is lacking product, the order will not be processed.
-      ![Order Invalid](images/customer2.png)
+      ![Order Invalid](images/customer2.PNG)
 
 #### Manager
 
-- Below is a demo of the `BamazonManager.js` file...
+- Below are screenshoots for the `BamazonManager.js` file:
   - Running `node BamazonManager.js` will display a menu and perform the specific requests.
-    ![Manager Menu](/example_images/BamazonManager-0.png)
+    ![Manager Menu](/images/managermenu.PNG)
     - The manager can choose option `1` to view the current inventory.
-      ![Manager 1](/example_images/BamazonManager-1.png)
+      ![Manager 1](/images/manager1.PNG)
     - The manager can choose option `2` to see low items in inventory (less than 5 in stock).
-      ![Manager 2](/example_images/BamazonManager-2.png)
+      ![Manager 2](/images/manager2.PNG)
     - The manager can choose option `3` to re-stock existing items.
-      ![Manager 3](/example_images/BamazonManager-3.png)
+      ![Manager 3](/images/manager3.PNG)
     - The manager can choose option `4` to add new items for sale.
-      ![Manager 4a](/example_images/BamazonManager-4a.png)
-      - Notice how the inventory was adjusted from steps `3` and `4`.
-        ![Manager 4b](/example_images/BamazonManager-4b.png)
+      ![Manager 4a](/images/manager4.PNG)
+

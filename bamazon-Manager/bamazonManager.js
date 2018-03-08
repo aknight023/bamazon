@@ -31,16 +31,14 @@ function viewAllProducts () {
 
 	console.table(viewAllProductsRes);
 	managerSelection();
-	});
-
-	
+	});	
 }
 
 function lowInventory () {
 		connection.query('Select * FROM products WHERE stock_quantity < 5', function(error, lowInventoryRes) {
-			if (error) throw error;
-			
-			if (lowInventoryRes === '[]') {
+			if (error) throw error;	
+						
+			if (lowInventoryRes.length !== 0) {
 				console.table(lowInventoryRes);
 			} else {
 				console.log('No Low Inventory!')
@@ -125,16 +123,6 @@ function addNewProduct () {
 	    message: '\nWhat is the price per unit of the new product?\n',
 	    name: 'price',
 	    filter: Number,
-	    validate: function(valueV) {
-	      typeof(valueV);
-
-	      if (valueV === 'NaN') {
-	      	return false;
-	      } else {
-	      	return true;
-	      }
-	    }
-	    
 	  },
 	  {
 	    type: 'input',
@@ -152,8 +140,6 @@ function addNewProduct () {
 	})
 
 }
-
-
 
 function managerSelection() {
   inquirer.prompt([{
@@ -182,7 +168,5 @@ function managerSelection() {
       	connection.end();
       	break;
     }
-  }).catch(function(error) {
-    throw error;
   });
 };
